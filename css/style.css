@@ -34,9 +34,10 @@ aside {
 
 nav {
   width: 1837px;
-  height: 70px;
+  height: 57px;
   background-color: #383838;
   margin-top: -5px;
+  text-align: center;
 }
 
 .navbar {
@@ -48,23 +49,32 @@ nav {
   display: none;
   position: absolute;
   z-index: 1;
-  width: 1000px;
+  width: 350px;
   background-color: #383838;
 }
 
+.current {
+  background: #991803;
+}
+
 .navbar:hover .dropdown-content {
-  display: block;
+  display: grid;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-size: 30px;
-  padding: 20px;
+  border: 2px black;
+  padding: 10px;
 }
 
 nav a:hover {
-  color: #991803;
+  color: darkgray;
+}
+
+nav ul {
+  padding: 10px;
 }
 
 #pb {
