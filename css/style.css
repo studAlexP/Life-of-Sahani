@@ -85,6 +85,10 @@ main {
   height: 800px;
 }
 
+#peach {
+  width: 500px;
+}
+
 footer {
   background-color: black;
   height: 50px;
