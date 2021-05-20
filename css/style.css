@@ -38,26 +38,10 @@ nav {
   text-align: center;
 }
 
-.navbar {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  width: 350px;
-  background-color: #383838;
-}
-
 .current {
   background: #991803;
 }
 
-.navbar:hover .dropdown-content {
-  display: grid;
-}
 
 nav a {
   color: white;
