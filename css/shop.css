@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.men {
+    width: 350px;
+    height: 350px;
+    margin-right: 100px;
+}
+
+.women {
+    width: 350px;
+    height: 350px;
+}
+
+.unisex {
+    width: 350px;
+    height: 350px;
+}
+
+#start {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+#women_btn{
+    position: absolute;
+    top: 650px;
+    right: 1060px;
+    padding-right:50px;
+    
+}
+#men_btn {
+    position: absolute;
+    top:650px;
+    left: 1100px;
+}
+
+
+
+
