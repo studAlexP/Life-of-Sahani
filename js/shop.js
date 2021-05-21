@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
      * cleans the shop interface
      */
     function switchToMen() {
-        const menShirt = ["/img/shop/white-men_tshirt_1.png", "/img/shop/white-men_tshirt_2.png", "/img/shop/black_pullover_1.png", "/img/shop/black_pullover_2.png"];
+        const menShirt = ["../img/shop/white-men_tshirt_1.png", "../img/shop/white-men_tshirt_2.png", "../img/shop/black_pullover_1.png", "../img/shop/black_pullover_2.png"];
         
         document.getElementById("start").remove();
         document.getElementById("women_btn").remove();
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
      * cleans the shop interface
      */
     function switchToWomen() {
-        const womenShirt = ["/img/shop/white-women_tshirt_1.png", "/img/shop/white-women_tshirt_2.png", "/img/shop/black_pullover_1.png", "/img/shop/black_pullover_2.png"];
+        const womenShirt = ["../img/shop/white-women_tshirt_1.png", "../img/shop/white-women_tshirt_2.png", "../img/shop/black_pullover_1.png", "../img/shop/black_pullover_2.png"];
 
         document.getElementById("start").remove();
         document.getElementById("women_btn").remove();
