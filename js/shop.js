@@ -45,8 +45,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
             tmp.className = gender;
         }
 
+        // Needed to create a second tr
+        let tableR2 = document.createElement("tr");
+
+        // Creates one button for each T-Shirt
+        for (let i = 0; i < list_of_shirts.length; i++) {
+            let button = document.createElement("input");
+            button.type = "button";
+            button.value = "Add to shopping cart";
+            button.className = "addTo_btn";
+            tableR2.appendChild(button);
+        }
+
         tableR.appendChild(tableD);
         table.appendChild(tableR);
+        table.appendChild(tableR2);
 
         main.appendChild(table);
     }
