@@ -1,47 +1,42 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
+    const shop = new Shop;
+    
+    let showMen = document.getElementById("men_btn");
+    let showWomen = document.getElementById("women_btn");
 
-    /**
-     * cleans the shop interface
-     */
-    function switchToMen() {
-        const menShirt = ["../img/shop/white-men_tshirt_1.png", "../img/shop/white-men_tshirt_2.png", "../img/shop/black_pullover_1.png", "../img/shop/black_pullover_2.png"];
-        
-        document.getElementById("start").remove();
-        document.getElementById("women_btn").remove();
-        document.getElementById("men_btn").remove();
+    showMen.addEventListener("click", () => {shop.showMenSection()});
+    showWomen.addEventListener("click", () => {shop.showWomenSection()});
+});
 
-        createShop(menShirt, "men");
+/**
+ * creates a new t shirt
+ */
+class Shirt {
+    constructor(name, price, image, quantity) {
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.quantity = quantity;
+    }
+}
+
+class Shop {
+    constructor() {
+        this.main = document.getElementById("mainShopScreen");
     }
 
-    /**
-     * cleans the shop interface
-     */
-    function switchToWomen() {
-        const womenShirt = ["../img/shop/white-women_tshirt_1.png", "../img/shop/white-women_tshirt_2.png", "../img/shop/black_pullover_1.png", "../img/shop/black_pullover_2.png"];
+    createShop(shirts, gender) {
 
-        document.getElementById("start").remove();
-        document.getElementById("women_btn").remove();
-        document.getElementById("men_btn").remove();
-
-        createShop(womenShirt, "women");
-    }
-
-    /**
-     * displays the shop based on the array of shirts
-     * @param {array of tshirt filled with men or women shirts} list_of_shirts
-     * @param {string of which gender is to be visited} gender
-     */
-    function createShop(list_of_shirts, gender) {
-        let main = document.getElementById("mainShopScreen");
         let table = document.createElement("table");
         let tableR = document.createElement("tr");
         let tableD = document.createElement("td");
+        let selectButton = document.createElement("select");
 
         // Creates for every T-Shirt an image and displays it
-        for(let i = 0; i < list_of_shirts.length; i++) {
+        for(let i = 0; i < shirts.length; i++) {
             let img = document.createElement("img");
             let tmp = tableD.appendChild(img);
-            tmp.src = list_of_shirts[i];
+            tmp.src = shirts[i].image;
             tmp.className = gender;
         }
 
@@ -49,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         let tableR2 = document.createElement("tr");
 
         // Creates one button for each T-Shirt
-        for (let i = 0; i < list_of_shirts.length; i++) {
+        for (let i = 0; i < shirts.length; i++) {
             let button = document.createElement("input");
             button.type = "button";
             button.value = "Add to shopping cart";
@@ -61,11 +56,50 @@ document.addEventListener("DOMContentLoaded", function(event) {
         table.appendChild(tableR);
         table.appendChild(tableR2);
 
-        main.appendChild(table);
+        this.main.appendChild(table);
+
+        let addToCart = document.getElementsByClassName("addTo_btn");
+
+        for (let i = 0; i < addToCart.length; i++) {
+            addToCart[i].addEventListener("click", () => {
+                shoppingCart.addToShoppingCart(shirts[i]);
+            });
+        }  
+    }    
+
+    /**
+     * Creates Shirt Object for every 
+     */
+    showWomenSection() {
+        let shirts = [];
+
+        document.getElementById("start").remove();
+        document.getElementById("women_btn").remove();
+        document.getElementById("men_btn").remove();
+
+        shirts[0] = new Shirt("Red Lips", 25, "../img/shop/white-women_tshirt_1.png", 5);
+        shirts[1] = new Shirt("Grey Eyes", 20, "../img/shop/white-women_tshirt_2.png", 5);
+        shirts[2] = new Shirt("Sahani Logo", 30, "../img/shop/black_pullover_1.png", 5);
+        shirts[3] = new Shirt("Marksman & Support", 28, "../img/shop/black_pullover_2.png", 5);
+
+        this.createShop(shirts, "women");
     }
 
-    let changeToMen = document.getElementById("women_btn");
-    let changeToWomen = document.getElementById("men_btn");
-    changeToMen.addEventListener("click", switchToWomen);
-    changeToWomen.addEventListener("click", switchToMen);
-});
+    /**
+     * Creates Shirt Object for every 
+     */
+    showMenSection() {
+        let shirts = [];
+
+        document.getElementById("start").remove();
+        document.getElementById("women_btn").remove();
+        document.getElementById("men_btn").remove();
+
+        shirts[0] = new Shirt("Red Lips", 25, "../img/shop/white-men_tshirt_1.png", 5);
+        shirts[1] = new Shirt("Grey Eyes", 20, "../img/shop/white-men_tshirt_2.png", 5);
+        shirts[2] = new Shirt("Sahani Logo", 30, "../img/shop/black_pullover_1.png", 5);
+        shirts[3] = new Shirt("Marksman & Support", 28, "../img/shop/black_pullover_2.png", 5);
+
+        this.createShop(shirts, "men");
+    }
+}

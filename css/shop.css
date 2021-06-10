@@ -1,53 +1,60 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .men {
-    width: 350px;
-    height: 350px;
-    margin-right: 100px;
-    border: 1px solid black;
+  width: 350px;
+  height: 350px;
+  margin-right: 100px;
+  border: 1px solid black;
 }
 
 .women {
-    width: 350px;
-    height: 350px;
+  width: 350px;
+  height: 350px;
 }
 
 .unisex {
-    width: 350px;
-    height: 350px;
+  width: 350px;
+  height: 350px;
 }
 
 #start {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-#women_btn{
-    position: absolute;
-    top: 620px;
-    right: 1060px;
-    padding-right:50px;
-    
+#women_btn {
+  position: absolute;
+  top: 620px;
+  right: 1060px;
+  padding-right: 50px;
 }
 #men_btn {
-    position: absolute;
-    top:620px;
-    left: 1100px;
+  position: absolute;
+  top: 620px;
+  left: 1100px;
 }
 
-.addTo_btn{
-    width: 160px;
-    height: 50px;
-    border: 3px solid white;
-    background-color: #2b2b2b;
-    color: white;
-    font-family: Century Gothic;
+.addTo_btn {
+  width: 160px;
+  height: 50px;
+  border: 3px solid white;
+  background-color: #2b2b2b;
+  color: white;
+  font-family: Century Gothic;
 }
 
+#shopOverview {
+  float: right;
+  width: 300px;
+  height: auto;
+  margin-top: -799px;
+  background-color: black;
+}
 
-
-
+#shoppingCart {
+  color: white;
+  list-style-type: none;
+}
