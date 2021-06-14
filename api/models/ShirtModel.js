@@ -46,7 +46,9 @@ class ShirtsModel {
         return shirt;
     }
 
-    static createShirt(shirt) {}
+    static createShirt(shirt) {
+        shirts.set(shirtID++, shirt);
+    }
 
     static updateShirtById(id, shirt) {}
 
