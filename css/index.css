@@ -1,0 +1,25 @@
+main {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    padding-right: 20px;
+}
+
+h1{
+    font-family: "Braga", "Comic Sans", cursive;
+    font-size: large;
+}
+
+#pb{
+    margin-left: 20px;
+    margin-right: 25px;
+}
+
+#news{
+    background-color: #FFFFFF;
+    height: 328px;
+    width: 310px;
+    margin-left: 1530px;
+    margin-top: -325px;
+    position: absolute;
+}
