@@ -1,0 +1,14 @@
+h1{
+    font-family: "Braga", "Comic Sans", cursive;
+  }
+
+main{
+   font-size: large;
+   font-family: Century Gothic, Arial, sans-serif;
+   padding-right: 250px;
+   padding-left: 50px;
+   padding-top: 50px;
+   text-align: justify;
+   line-height: 1.6;
+}
+  
