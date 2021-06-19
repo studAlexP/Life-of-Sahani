@@ -1,2 +1,5 @@
 .idea/
 API_TEST.rest
+node_modules/
+db.stormdb
+.env
