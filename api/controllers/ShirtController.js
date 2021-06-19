@@ -37,7 +37,18 @@ class ShirtsController {
         res.status(200).send(shirt);
     }
 
-    static shirtUpdateShirtById (req, res) {}
+    static shirtUpdateShirtById (req, res) {
+        const {id} = req.params;
+        const shirt = {
+            shirtGender: req.body.shirtGender,
+            shirtName: req.body.shirtName,
+            shirtPrice: req.body.shirtPrice,
+            shirtImage: req.body.shirtImage,
+            shirtQuantity: req.body.shirtQuantity
+        };
+        ShirtsModel.updateShirtById(id, shirt);
+        res.status(200).send(shirt);
+    }
 
     static shirtDeleteById (req, res) {
         const {id} = req.params;
