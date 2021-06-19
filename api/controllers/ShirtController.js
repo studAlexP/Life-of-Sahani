@@ -1,4 +1,12 @@
 const ShirtsModel = require("../models/ShirtModel");
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.raw());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"))
 
 class ShirtsController {
     static shirtsGetAll (req, res) {
@@ -17,8 +25,16 @@ class ShirtsController {
     }
 
     static shirtCreateShirt (req, res) {
-        let newShirt = req.body;
-        ShirtsModel.createShirt(newShirt);
+        const shirt = {
+            shirtGender: req.body.shirtGender,
+            shirtName: req.body.shirtName,
+            shirtPrice: req.body.shirtPrice,
+            shirtImage: req.body.shirtImage,
+            shirtQuantity: req.body.shirtQuantity
+        };
+        //ShirtsModel.createShirt(shirt);
+        ShirtsModel.createShirt(shirt);
+        res.status(200).send(shirt);
     }
 
     static shirtUpdateShirtById (req, res) {}
