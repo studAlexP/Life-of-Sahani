@@ -1,68 +1,45 @@
-document.addEventListener("DOMContentLoaded", function (event) {
-    const shop = new Shop;
-    
-    let showMen = document.getElementById("men_btn");
-    let showWomen = document.getElementById("women_btn");
-
-    showMen.addEventListener("click", () => {shop.showMenSection()});
-    showWomen.addEventListener("click", () => {shop.showWomenSection()});
-
-   /* const shirt = {
-        shirtGender: "female",
-        shirtName: "test",
-        shirtPrice: 25.00,
-        shirtImage: "../img/shop/white-women_tshirt_1.png",
-        shirtQuantity: 5
-    }
-
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(shirt),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }
-
-    const url = "http://localhost:3000/api/shirts/create"
-    fetch(url, options)
-        .then(res=>res.json())
-        .then(res=>console.log(res))*/
-
-});
-
-/**
- * creates a new t shirt
- */
 class Shirt {
-    constructor(name, price, image, quantity) {
+    /**
+     * Creates a shirt based on the parameters
+     * @constructor
+     * @param {string} name - Name of the Shirt
+     * @param {int} price - Price of the Shirt
+     * @param {string} image - Path to an Image 
+     * @param {int} stockQuantity - Quantity of the Shirt
+     * @param {int} cartQuantity - Amount of shirts in shopping cart
+     */
+    constructor(name, price, image, stockQuantity) {
         this.name = name;
         this.price = price;
         this.image = image;
-        this.quantity = quantity;
+        this.stockQuantity = stockQuantity;
+        this.cartQuantity = 1;
     }
 }
 
 class Shop {
+    /**
+     * @constructor
+     */
     constructor() {
         this.main = document.getElementById("mainShopScreen");
     }
 
     /**
      * Creates the shop base on given params
-     * @param {array with shirt objects} shirts 
-     * @param {string containing "men" or "women"} gender 
+     * @param {Object[]} shirts - Array with Shirt Objects
+     * @param {string} gender - Contains either "men" or "women"
      */
     createShop(shirts, gender) {
         this.shoppingCart = new ShoppingCart();
-        console.log(shirts[0]);
 
         let table = document.createElement("table");
         let tableR = document.createElement("tr");
         let tableD = document.createElement("td");
 
 
-        // Creates for every T-Shirt an image and displays it
-        for(let i = 0; i < shirts.length; i++) {
+        // Creates an image for every T-Shirt and displays it
+        for (let i = 0; i < shirts.length; i++) {
             let img = document.createElement("img");
             let tmp = tableD.appendChild(img);
             tmp.src = shirts[i].image;
@@ -94,8 +71,8 @@ class Shop {
                 this.shoppingCart.addShirt(shirts[i]);
                 this.shoppingCart.showSum();
             });
-        }  
-    }    
+        }
+    }
 
     /**
      * Creates Shirt Object for every 
@@ -119,7 +96,7 @@ class Shop {
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].shirtGender == "female" || data[i].shirtGender == "unisex") {
-                       shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity)); 
+                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
                     }
                 }
                 this.createShop(shirts, "women");
@@ -157,6 +134,10 @@ class Shop {
 }
 
 class ShoppingCart {
+    /**
+     * Create an empty shopping cart
+     * @constructor
+     */
     constructor() {
         this.shoppingCartSum = 0;
         this.shirts = [];
@@ -175,11 +156,14 @@ class ShoppingCart {
         this.aside.appendChild(this.div);
     }
 
+    /**
+     * Adds a shirt to the shopping cart
+     * @param {Object} shirt - Object from Type Shirt
+     */
     addShirt(shirt) {
         if (this.shirts.includes(shirt)) {
             console.log("tes");
         } else {
-            console.log(shirt);
             let ul = document.getElementsByTagName("ul")[1];
             let li = document.createElement("li");
             let deleteButton = document.createElement("button");
@@ -187,7 +171,7 @@ class ShoppingCart {
             deleteButton.innerHTML = "X";
             deleteButton.className = "deleteButton";
 
-            li.innerHTML = shirt.name + " ";
+            li.innerHTML = shirt.cartQuantity + "x " + shirt.name + " " + (shirt.price * shirt.cartQuantity).toFixed(2) + "€ ";
             li.id = shirt.name;
             ul.style.listStyleType = "none";
 
@@ -205,9 +189,33 @@ class ShoppingCart {
         }
     }
 
-    //TODO update quantity of a shirt
-    updateShirt(shirt) {}
+    /**
+     * Updates the quantity from a shirt
+     * @param {Object} shirt - Object from type shirt
+     */
+    updateShirt(shirt) {
+        let update = document.getElementById(shirt.name);
+        let deleteButton = document.createElement('button');
 
+        deleteButton.innerHTML = "X";
+        deleteButton.className = "deleteButton";
+
+        update.innerHTML = shirt.cartQuantity + "x " + shirt.name + " " + (shirt.price * shirt.cartQuantity).toFixed(2) + "€ ";
+        update.appendChild(deleteButton);
+
+        let deletBtn = document.getElementsByClassName("deleteButton");
+        for (let i = 0; i < deletBtn.length; i++) {
+            deletBtn[i].addEventListener("click", () => {
+                this.deleteShirt(shirt);
+            });
+        }
+    }
+
+
+    /**
+     * Removes an entry from the shopping cart
+     * @param {Object} shirt - Object from type shirt 
+     */
     deleteShirt(shirt) {
         document.getElementById(shirt.name).remove();
 
@@ -219,6 +227,9 @@ class ShoppingCart {
         this.showSum();
     }
 
+    /**
+     * Shows the sum of all objects in the shopping cart
+     */
     showSum() {
         let sum = 0;
         this.shirts.forEach(e => {
@@ -227,3 +238,15 @@ class ShoppingCart {
         document.getElementById("shoppingCartSum").textContent = "Sum: " + sum.toFixed(2) + " €";
     }
 }
+
+const shop = new Shop;
+
+let showMen = document.getElementById("men_btn");
+let showWomen = document.getElementById("women_btn");
+
+showMen.addEventListener("click", () => {
+    shop.showMenSection()
+});
+showWomen.addEventListener("click", () => {
+    shop.showWomenSection()
+});
