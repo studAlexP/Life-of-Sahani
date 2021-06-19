@@ -6,6 +6,28 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     showMen.addEventListener("click", () => {shop.showMenSection()});
     showWomen.addEventListener("click", () => {shop.showWomenSection()});
+
+   /* const shirt = {
+        shirtGender: "female",
+        shirtName: "test",
+        shirtPrice: 25.00,
+        shirtImage: "../img/shop/white-women_tshirt_1.png",
+        shirtQuantity: 5
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(shirt),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    const url = "http://localhost:3000/api/shirts/create"
+    fetch(url, options)
+        .then(res=>res.json())
+        .then(res=>console.log(res))*/
+
 });
 
 /**
@@ -25,12 +47,19 @@ class Shop {
         this.main = document.getElementById("mainShopScreen");
     }
 
+    /**
+     * Creates the shop base on given params
+     * @param {array with shirt objects} shirts 
+     * @param {string containing "men" or "women"} gender 
+     */
     createShop(shirts, gender) {
+        this.shoppingCart = new ShoppingCart();
+        console.log(shirts[0]);
 
         let table = document.createElement("table");
         let tableR = document.createElement("tr");
         let tableD = document.createElement("td");
-        let selectButton = document.createElement("select");
+
 
         // Creates for every T-Shirt an image and displays it
         for(let i = 0; i < shirts.length; i++) {
@@ -62,7 +91,8 @@ class Shop {
 
         for (let i = 0; i < addToCart.length; i++) {
             addToCart[i].addEventListener("click", () => {
-                shoppingCart.addToShoppingCart(shirts[i]);
+                this.shoppingCart.addShirt(shirts[i]);
+                this.shoppingCart.showSum();
             });
         }  
     }    
@@ -77,12 +107,23 @@ class Shop {
         document.getElementById("women_btn").remove();
         document.getElementById("men_btn").remove();
 
-        shirts[0] = new Shirt("Red Lips", 25, "../img/shop/white-women_tshirt_1.png", 5);
-        shirts[1] = new Shirt("Grey Eyes", 20, "../img/shop/white-women_tshirt_2.png", 5);
-        shirts[2] = new Shirt("Sahani Logo", 30, "../img/shop/black_pullover_1.png", 5);
-        shirts[3] = new Shirt("Marksman & Support", 28, "../img/shop/black_pullover_2.png", 5);
-
-        this.createShop(shirts, "women");
+        // Fetches the shirts from the api with the gender female or unisex
+        fetch('http://localhost:3000/api/shirts')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server not reachable');
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].shirtGender == "female" || data[i].shirtGender == "unisex") {
+                       shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity)); 
+                    }
+                }
+                this.createShop(shirts, "women");
+            });
     }
 
     /**
@@ -95,11 +136,94 @@ class Shop {
         document.getElementById("women_btn").remove();
         document.getElementById("men_btn").remove();
 
-        shirts[0] = new Shirt("Red Lips", 25, "../img/shop/white-men_tshirt_1.png", 5);
-        shirts[1] = new Shirt("Grey Eyes", 20, "../img/shop/white-men_tshirt_2.png", 5);
-        shirts[2] = new Shirt("Sahani Logo", 30, "../img/shop/black_pullover_1.png", 5);
-        shirts[3] = new Shirt("Marksman & Support", 28, "../img/shop/black_pullover_2.png", 5);
+        // Fetches the shirts from the api with the gender male or unisex
+        fetch('http://localhost:3000/api/shirts')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server not reachable');
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].shirtGender == "male" || data[i].shirtGender == "unisex") {
+                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
+                    }
+                }
+                this.createShop(shirts, "men");
+            });
+    }
+}
 
-        this.createShop(shirts, "men");
+class ShoppingCart {
+    constructor() {
+        this.shoppingCartSum = 0;
+        this.shirts = [];
+
+        this.aside = document.getElementById("shopOverview");
+        this.h2 = document.createElement("h2");
+        this.shoppingCartHeading = document.createTextNode("Shopping Cart");
+        this.ul = document.createElement("ul");
+        this.div = document.createElement("div");
+        this.div.id = "shoppingCartSum";
+        this.div.textContent = "Sum: " + this.shoppingCartSum + " €";
+
+        this.h2.appendChild(this.shoppingCartHeading);
+        this.aside.appendChild(this.h2);
+        this.aside.appendChild(this.ul);
+        this.aside.appendChild(this.div);
+    }
+
+    addShirt(shirt) {
+        if (this.shirts.includes(shirt)) {
+            console.log("tes");
+        } else {
+            console.log(shirt);
+            let ul = document.getElementsByTagName("ul")[1];
+            let li = document.createElement("li");
+            let deleteButton = document.createElement("button");
+
+            deleteButton.innerHTML = "X";
+            deleteButton.className = "deleteButton";
+
+            li.innerHTML = shirt.name + " ";
+            li.id = shirt.name;
+            ul.style.listStyleType = "none";
+
+            li.appendChild(deleteButton);
+            ul.appendChild(li);
+
+            this.shirts.push(shirt);
+
+            let deletBtn = document.getElementsByClassName("deleteButton");
+            for (let i = 0; i < deletBtn.length; i++) {
+                deletBtn[i].addEventListener("click", () => {
+                    this.deleteShirt(shirt);
+                });
+            }
+        }
+    }
+
+    //TODO update quantity of a shirt
+    updateShirt(shirt) {}
+
+    deleteShirt(shirt) {
+        document.getElementById(shirt.name).remove();
+
+        for (let i = 0; i < this.shirts.length; i++) {
+            if (shirt.name == this.shirts[i].name) {
+                this.shirts.splice(i, 1);
+            }
+        }
+        this.showSum();
+    }
+
+    showSum() {
+        let sum = 0;
+        this.shirts.forEach(e => {
+            sum += e.price;
+        });
+        document.getElementById("shoppingCartSum").textContent = "Sum: " + sum.toFixed(2) + " €";
     }
 }

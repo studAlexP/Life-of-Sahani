@@ -38,10 +38,12 @@ aside {
 
 nav {
   width: 100%;
-  height: 56px;
+  height: 57px;
   background-color: #383838;
   margin-top: -5px;
   text-align: center;
+  flex-wrap: wrap;
+
 }
 
 .current {
@@ -65,13 +67,27 @@ nav ul {
   padding: 10px;
 }
 
+nav li {
+  list-style: none;
+  display: inline;
+}
+
+.hamburger{
+  background-color: transparent;
+  border: 0px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 50px;
+  display: none;
+}
+
 #pb {
   width: 310px;
   float: left;
 }
 
 main {
-  height: 800px;
+  height: 100%;
 }
 
 #peach {
@@ -95,16 +111,52 @@ main {
 
 footer {
   background-color: black;
-  height: 30px;
+  height: 40px;
   width: 100%;
   top: 800px;
   bottom: 0;
   position: relative;
+  padding-top: 20px;
+  padding-left: 20px;
+  text-align: center;
+  
 }
 
+@media only screen and (max-width: 1492px) {
+  aside{
+    height: 52px;
+  }
+
+  .logo{
+    width: 53px;
+    padding-left: 13px;
+  }
+
+  .logolink{
+    text-decoration: none;
+  }
+}
 
 @media only screen and (max-width: 768px) {
-  
+  .nav-ul {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .nav-ul.show {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
+    padding-top: 6px;
+    padding-left: 6px;
+  }
+
+
+
+    
 
 }
 
