@@ -32,18 +32,20 @@ class Shop {
      */
     createShop(shirts, gender) {
         this.shoppingCart = new ShoppingCart();
+        const maxShirtQuantity = 5;
 
         let table = document.createElement("table");
         let tableR = document.createElement("tr");
         let tableD = document.createElement("td");
 
-
         // Creates an image for every T-Shirt and displays it
         for (let i = 0; i < shirts.length; i++) {
             let img = document.createElement("img");
-            let tmp = tableD.appendChild(img);
+            let td = document.createElement("td");
+            let tmp = td.appendChild(img);
             tmp.src = shirts[i].image;
             tmp.className = gender;
+            table.appendChild(td);
         }
 
         // Needed to create a second tr
@@ -52,10 +54,26 @@ class Shop {
         // Creates one button for each T-Shirt
         for (let i = 0; i < shirts.length; i++) {
             let button = document.createElement("input");
+            let td = document.createElement("td");
+            let select = document.createElement("select");
+
+            // Creates a select button
+            for (let j = 0; j <= maxShirtQuantity; j++) {
+                let options = document.createElement("option");
+                options.value = j;
+                options.text = j;
+                select.appendChild(options);
+            }
+
+            select.className = "selectQuantity";
+
             button.type = "button";
             button.value = "Add to shopping cart";
             button.className = "addTo_btn";
-            tableR2.appendChild(button);
+
+            td.appendChild(button);
+            td.appendChild(select);
+            tableR2.appendChild(td);
         }
 
         tableR.appendChild(tableD);
@@ -65,9 +83,11 @@ class Shop {
         this.main.appendChild(table);
 
         let addToCart = document.getElementsByClassName("addTo_btn");
+        let quantity = document.getElementsByClassName("selectQuantity");
 
         for (let i = 0; i < addToCart.length; i++) {
             addToCart[i].addEventListener("click", () => {
+                shirts[i].cartQuantity = quantity[i].value;
                 this.shoppingCart.addShirt(shirts[i]);
                 this.shoppingCart.showSum();
             });
@@ -233,7 +253,7 @@ class ShoppingCart {
     showSum() {
         let sum = 0;
         this.shirts.forEach(e => {
-            sum += e.price;
+            sum += e.cartQuantity * e.price;
         });
         document.getElementById("shoppingCartSum").textContent = "Sum: " + sum.toFixed(2) + " €";
     }
