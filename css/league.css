@@ -11,4 +11,7 @@ main{
    text-align: justify;
    line-height: 1.8;
 }
+table{
+  border-spacing: 50px 50px;
+}
   

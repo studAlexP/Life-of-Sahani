@@ -16,4 +16,8 @@ main{
 p{
   margin-bottom: 50px;
 }
+
+table{
+  border-spacing: 50px;
+}
   
