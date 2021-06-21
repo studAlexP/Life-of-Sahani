@@ -57,8 +57,10 @@ class Shop {
             let td = document.createElement("td");
             let select = document.createElement("select");
 
+            td.className = "td2";
+
             // Creates a select button
-            for (let j = 0; j <= maxShirtQuantity; j++) {
+            for (let j = 1; j <= maxShirtQuantity; j++) {
                 let options = document.createElement("option");
                 options.value = j;
                 options.text = j;
@@ -104,8 +106,22 @@ class Shop {
         document.getElementById("women_btn").remove();
         document.getElementById("men_btn").remove();
 
+        xhttp.onload = function () {
+            let data = JSON.parse(xhttp.responseText)
+            for (let i = 0; i < data.length; i++) {
+                if (data[i] != null) {
+                    if (data[i].shirtGender == "female" || data[i].shirtGender == "unisex") {
+                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity))
+                    }
+                }
+            }
+            shop.createShop(shirts, "women")
+        }
+        xhttp.open("GET", serverUrl, true)
+        xhttp.send()
+
         // Fetches the shirts from the api with the gender female or unisex
-        fetch('http://localhost:3000/api/shirts')
+        /*fetch(serverUrl)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Server not reachable');
@@ -115,12 +131,14 @@ class Shop {
             })
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i].shirtGender == "female" || data[i].shirtGender == "unisex") {
-                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
+                    if (data[i] != null) {
+                        if (data[i].shirtGender == "female" || data[i].shirtGender == "unisex") {
+                            shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
+                        }
                     }
                 }
                 this.createShop(shirts, "women");
-            });
+            });*/
     }
 
     /**
@@ -133,8 +151,24 @@ class Shop {
         document.getElementById("women_btn").remove();
         document.getElementById("men_btn").remove();
 
+        xhttp.onload = function () {
+            let data = JSON.parse(xhttp.responseText)
+            for (let i = 0; i < data.length; i++) {
+                if (data[i] != null) {
+                    if (data[i].shirtGender == "male" || data[i].shirtGender == "unisex") {
+                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
+                    }
+
+                }
+
+            }
+            shop.createShop(shirts, "men")
+        }
+        xhttp.open("GET", serverUrl, true);
+        xhttp.send();
+
         // Fetches the shirts from the api with the gender male or unisex
-        fetch('http://localhost:3000/api/shirts')
+        /*fetch(serverUrl)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Server not reachable');
@@ -144,12 +178,15 @@ class Shop {
             })
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i].shirtGender == "male" || data[i].shirtGender == "unisex") {
-                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
+                    if (data[i] != null) {
+                        if (data[i].shirtGender == "male" || data[i].shirtGender == "unisex") {
+                            shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
+                        }
+    
                     }
                 }
                 this.createShop(shirts, "men");
-            });
+            });*/
     }
 }
 
@@ -164,16 +201,27 @@ class ShoppingCart {
 
         this.aside = document.getElementById("shopOverview");
         this.h2 = document.createElement("h2");
-        this.shoppingCartHeading = document.createTextNode("Shopping Cart");
         this.ul = document.createElement("ul");
         this.div = document.createElement("div");
+        this.checkOut = document.createElement("input");
+
+        this.checkOut.type = "button";
+        this.checkOut.value = "Check out";
+        this.checkOut.id = "checkOut";
+
+        this.shoppingCartHeading = document.createTextNode("Shopping Cart");
+
         this.div.id = "shoppingCartSum";
         this.div.textContent = "Sum: " + this.shoppingCartSum + " €";
 
         this.h2.appendChild(this.shoppingCartHeading);
+
         this.aside.appendChild(this.h2);
         this.aside.appendChild(this.ul);
         this.aside.appendChild(this.div);
+        this.aside.appendChild(this.checkOut)
+
+        this.checkOutBTN = document.getElementById("checkOut");
     }
 
     /**
@@ -182,7 +230,7 @@ class ShoppingCart {
      */
     addShirt(shirt) {
         if (this.shirts.includes(shirt)) {
-            console.log("tes");
+            this.updateShirt(shirt)
         } else {
             let ul = document.getElementsByTagName("ul")[1];
             let li = document.createElement("li");
@@ -206,6 +254,9 @@ class ShoppingCart {
                     this.deleteShirt(shirt);
                 });
             }
+            this.checkOutBTN.addEventListener("click", () => {
+                this.cartCheckOut(this.shoppingCartSum)
+            })
         }
     }
 
@@ -229,6 +280,9 @@ class ShoppingCart {
                 this.deleteShirt(shirt);
             });
         }
+        this.checkOutBTN.addEventListener("click", () => {
+            this.cartCheckOut(this.shoppingCartSum)
+        })
     }
 
 
@@ -244,22 +298,108 @@ class ShoppingCart {
                 this.shirts.splice(i, 1);
             }
         }
-        this.showSum();
+        this.checkOutBTN.addEventListener("click", () => {
+            this.cartCheckOut()
+        })
+        this.showSum(this.shoppingCartSum);
     }
 
     /**
      * Shows the sum of all objects in the shopping cart
      */
     showSum() {
-        let sum = 0;
+        let sum = 0
         this.shirts.forEach(e => {
             sum += e.cartQuantity * e.price;
         });
+
+        this.shoppingCartSum = sum;
+
         document.getElementById("shoppingCartSum").textContent = "Sum: " + sum.toFixed(2) + " €";
+    }
+
+    /**
+     * Clears all elements and displays the total sum
+     * @param {int} sum - Total of all the items bought 
+     */
+    cartCheckOut(sum) {
+        for (let i = 0; i < this.shirts.length; i++) {
+            if (this.shirts[i].cartQuantity == 5) {
+                console.log("test")
+                let index = 0;
+                switch (this.shirts[i].name) {
+                    case "Red Lips":
+                        index = 0;
+                        break;
+                    case "Grey Eyes":
+                        index = 1;
+                        break;
+                    case "Sahani Logo":
+                        index = 2;
+                        break;
+                    case "Marksman &  Support":
+                        index = 3;
+                        break;
+                }
+                xhttp.open("DELETE", serverUrl + "/delete/" + index);
+                xhttp.setRequestHeader("Accept", "application/json");
+                this.deleteShirt(this.shirts[i]);
+                xhttp.send();
+            }
+            if (this.shirts[i].cartQuantity != 0) {
+                console.log("test2")
+                let index = 0;
+                switch (this.shirts[i].name) {
+                    case "Red Lips":
+                        index = 0;
+                        break;
+                    case "Grey Eyes":
+                        index = 1;
+                        break;
+                    case "Sahani Logo":
+                        index = 2;
+                        break;
+                    case "Marksman &  Support":
+                        index = 3;
+                        break;
+                }
+                xhttp.open("PUT", serverUrl + "/" + index);
+                xhttp.setRequestHeader("Content-Type", "application/json");
+                let data = {
+                    "shirtGender": this.shirts[i].gender,
+                    "shirtName": this.shirts[i].name,
+                    "shirtPrice": this.shirts[i].price,
+                    "shirtImage": this.shirts[i].image,
+                    "shirtQuantity": 5 - this.shirts[i].cartQuantity
+                };
+                this.updateShirt(this.shirts[i]);
+                xhttp.send(JSON.stringify(data));
+            }
+        }
+        let main = document.getElementById("mainShopScreen");
+
+        let h1 = document.createElement("h1");
+        h1.style.textAlign = "center";
+        h1.style.marginTop = "200px";
+
+        let total = document.createTextNode("Successful checkout with a total price of " + sum + " €");
+
+        h1.appendChild(total);
+
+        const removeChilds = (parent) => {
+            while (parent.lastChild) {
+                parent.removeChild(parent.lastChild);
+            }
+        };
+
+        removeChilds(main);
+        main.appendChild(h1);
     }
 }
 
 const shop = new Shop;
+const serverUrl = 'http://localhost:3000/api/shirts';
+const xhttp = new XMLHttpRequest();
 
 let showMen = document.getElementById("men_btn");
 let showWomen = document.getElementById("women_btn");
