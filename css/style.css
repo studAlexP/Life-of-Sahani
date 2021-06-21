@@ -18,9 +18,9 @@ header {
   position: relative;
 }
 
-#banner{
-    width: 1324px;
-    height: 304px;
+#banner {
+  width: 1324px;
+  height: 304px;
 }
 
 aside {
@@ -72,7 +72,7 @@ nav li {
   display: inline;
 }
 
-.hamburger{
+.hamburger {
   background-color: transparent;
   border: 0px;
   color: #fff;
@@ -94,47 +94,49 @@ main {
   width: 500px;
 }
 
-#me{
-    padding-left:20px;
-
-}
 
 
 .link {
-    color: #a6a6a6;
+  color: #a6a6a6;
 }
 
 .link:visited {
-    color: #b366ff;
+  color: #b366ff;
 
 }
 
 footer {
   background-color: black;
   height: 40px;
-  width: 100%;
   top: 800px;
   bottom: 0;
   position: relative;
   padding-top: 20px;
   padding-left: 20px;
   text-align: center;
-  
+
 }
 
 @media only screen and (max-width: 1492px) {
-  aside{
+  aside {
     height: 52px;
   }
 
-  .logo{
+  .logo {
     width: 53px;
     padding-left: 13px;
   }
 
-  .logolink{
+  .logolink {
     text-decoration: none;
   }
+
+  #banner {
+    width: 100%;
+    height: auto;
+}
+
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -155,8 +157,4 @@ footer {
   }
 
 
-
-    
-
 }
-

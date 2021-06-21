@@ -12,6 +12,21 @@ main{
    line-height: 1.8;
 }
 table{
+
   border-spacing: 50px 50px;
+}
+
+@media only screen and (max-width: 1492px) {
+  main{
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  table{
+    display: block;
+  }
+
+
+
 }
   
