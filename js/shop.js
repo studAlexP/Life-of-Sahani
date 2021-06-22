@@ -2,13 +2,15 @@ class Shirt {
     /**
      * Creates a shirt based on the parameters
      * @constructor
+     * @param {string} gender - Either "male" or "female"
      * @param {string} name - Name of the Shirt
      * @param {int} price - Price of the Shirt
      * @param {string} image - Path to an Image 
      * @param {int} stockQuantity - Quantity of the Shirt
      * @param {int} cartQuantity - Amount of shirts in shopping cart
      */
-    constructor(name, price, image, stockQuantity) {
+    constructor(gender, name, price, image, stockQuantity) {
+        this.gender = gender;
         this.name = name;
         this.price = price;
         this.image = image;
@@ -30,7 +32,7 @@ class Shop {
      * @param {Object[]} shirts - Array with Shirt Objects
      * @param {string} gender - Contains either "men" or "women"
      */
-    createShop(shirts, gender) {
+    async createShop(shirts, gender) {
         this.shoppingCart = new ShoppingCart();
         const maxShirtQuantity = 5;
 
@@ -99,7 +101,7 @@ class Shop {
     /**
      * Creates Shirt Object for every 
      */
-    showWomenSection() {
+    async showWomenSection() {
         let shirts = [];
 
         document.getElementById("start").remove();
@@ -111,7 +113,7 @@ class Shop {
             for (let i = 0; i < data.length; i++) {
                 if (data[i] != null) {
                     if (data[i].shirtGender == "female" || data[i].shirtGender == "unisex") {
-                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity))
+                        shirts.push(new Shirt(data[i].shirtGender, data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity))
                     }
                 }
             }
@@ -144,7 +146,7 @@ class Shop {
     /**
      * Creates Shirt Object for every 
      */
-    showMenSection() {
+    async showMenSection() {
         let shirts = [];
 
         document.getElementById("start").remove();
@@ -156,7 +158,7 @@ class Shop {
             for (let i = 0; i < data.length; i++) {
                 if (data[i] != null) {
                     if (data[i].shirtGender == "male" || data[i].shirtGender == "unisex") {
-                        shirts.push(new Shirt(data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
+                        shirts.push(new Shirt(data[i].shirtGender, data[i].shirtName, data[i].shirtPrice, data[i].shirtImage, data[i].shirtQuantity));
                     }
 
                 }
@@ -322,10 +324,10 @@ class ShoppingCart {
      * Clears all elements and displays the total sum
      * @param {int} sum - Total of all the items bought 
      */
-    cartCheckOut(sum) {
+    async cartCheckOut(sum) {
         for (let i = 0; i < this.shirts.length; i++) {
-            if (this.shirts[i].cartQuantity == 5) {
-                console.log("test")
+            // Deletes a shirt from the database if the stock is empty
+            if (this.shirts[i].cartQuantity === "5") {
                 let index = 0;
                 switch (this.shirts[i].name) {
                     case "Red Lips":
@@ -345,9 +347,8 @@ class ShoppingCart {
                 xhttp.setRequestHeader("Accept", "application/json");
                 this.deleteShirt(this.shirts[i]);
                 xhttp.send();
-            }
-            if (this.shirts[i].cartQuantity != 0) {
-                console.log("test2")
+            } else {
+                // Updates stock quantity if a shirt was bought
                 let index = 0;
                 switch (this.shirts[i].name) {
                     case "Red Lips":
