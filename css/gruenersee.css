@@ -20,4 +20,31 @@ p{
 table{
   border-spacing: 50px;
 }
+
+iframe{
+  width: 600px;
+  height: 450px;
+  border: 0px;
+}
+
+@media only screen and (max-width: 1300px) {
+
+  iframe {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+@media only screen and (max-width: 1492px) {
+  main{
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  table{
+    border-spacing: 20px;
+  }
+
+}
   

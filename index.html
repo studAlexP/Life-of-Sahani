@@ -5,7 +5,7 @@
     <title>Life of Sahani</title>
 
     <meta charset="UTF-8">
-    <script src="js/nav.js"></script>
+    <script defer src="js/nav.js"></script>
     <link href="img/favicon.ico" rel="shortcut icon"/>
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <link  href="css/index.css" type="text/css" rel="stylesheet">
@@ -15,18 +15,6 @@
 </head>
 
 <body>
-    
-<section>                         
-
-    <form action="auth" method="POST">
-
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" class="login" value="Login">
-
-    </form>
-
-</section>
 
 <header>
 
@@ -49,19 +37,17 @@
 </header>
 
 <nav>
-
-    <button class="hamburger" id="hamburger">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <ul class="nav-ul" id="nav-ul">
+    
+    <div class="openMenu"><i class="fa fa-bars"></i></div>
+    <ul class="mainMenu">
         <li><a class="current" href="index.html">Home</a></li>
         <li><a href="html/youtube.html">YouTube</a></li>
         <li><a href="html/instagram.html">Instagram</a></li>
         <li><a href="html/shop.html">Shop</a></li>
+        <li><a href="html/feedback.html">Feedback</a></li>
+    <div class="closeMenu"><i class="fa fa-times"></i></div>
+    
     </ul>
-    
-    
 </nav>
 
 <main>
@@ -87,7 +73,16 @@
     </p>
 
     <section id="news">
-        HIER WIRD DIE NEWS SECTION
+        <h2>Check out my latest video!!</h2>
+        <h3>Gaming</h3>
+        <iframe src="https://www.youtube.com/embed/f3isvPkXCI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h3>Vlog</h3>
+        <iframe src="https://www.youtube.com/embed/XWU9nlPJBec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h3>Creative Corner</h3>
+        <iframe src="https://www.youtube.com/embed/6XdOQmnr7r4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h3>Cooking</h3>
+        <iframe src="https://www.youtube.com/embed/7YjxCuJgGD4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
     </section>
 </main>
 

@@ -72,14 +72,7 @@ nav li {
   display: inline;
 }
 
-.hamburger {
-  background-color: transparent;
-  border: 0px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 50px;
-  display: none;
-}
+
 
 #pb {
   width: 310px;
@@ -117,6 +110,67 @@ footer {
 
 }
 
+
+nav .openMenu {
+  font-size: 2rem;
+  display: none;
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+nav .mainMenu .closeMenu,
+.icons i {
+  font-size: 2rem;
+  display: none;
+  cursor: pointer;
+}
+
+@media(max-width: 800px) {
+  nav .mainMenu {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    transition: top 1s ease;
+    display: none;
+  }
+
+  nav .mainMenu .closeMenu {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+  }
+
+  nav .openMenu {
+    display: block;
+  }
+
+  nav .mainMenu li a:hover {
+    background: none;
+    color: #991803;
+    font-size: 1.6rem;
+  }
+
+  nav .mainMenu li {
+    padding-bottom: 15px;
+  }
+
+  .current {
+    background: none;
+  }
+
+}
+
+
+
 @media only screen and (max-width: 1492px) {
   aside {
     height: 52px;
@@ -134,26 +188,6 @@ footer {
   #banner {
     width: 100%;
     height: auto;
-}
-
-
-}
-
-@media only screen and (max-width: 768px) {
-  .nav-ul {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .nav-ul.show {
-    display: block;
-  }
-
-  .hamburger {
-    display: flex;
-    padding-top: 6px;
-    padding-left: 6px;
   }
 
 

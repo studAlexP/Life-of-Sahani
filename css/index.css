@@ -23,6 +23,7 @@ h1 {
 
 h2 {
     text-align: center;
+    padding-bottom: 20px;
 }
 
 #pb {
@@ -39,6 +40,11 @@ h2 {
     position: absolute;
     color: #fff;
 }
+
+iframe{
+    width:400px;
+    height: 225px;
+  }
 
 @media only screen and (max-width: 1492px) {
     main {

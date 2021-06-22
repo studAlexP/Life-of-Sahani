@@ -19,11 +19,12 @@ main {
 
 iframe {
   padding-left: 100px;
+  width: 560px;
+  height: 315px; 
 }
 
 .messurements{
   padding-right: 20px;
-
 }
 
 
@@ -31,10 +32,6 @@ iframe {
   table{
     max-width: 100%;
     height: auto;
-  }
-  
-  iframe{
-    
   }
 
   main{
@@ -44,8 +41,16 @@ iframe {
 
   .messurements{
     text-align: right;
-    padding-right: 0px;
+    padding-right: 10px;
+    width: 60px;
   }
 
 
+}
+
+@media only screen and (max-width: 900px) {
+
+  iframe {
+    width: 100%;
+  }
 }
