@@ -5,17 +5,25 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.raw());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(express.static("public"))
 
 class ShirtsController {
-    static shirtsGetAll (req, res) {
+    static shirtsGetAll(req, res) {
         const shirtsArray = ShirtsModel.getShirts();
         res.status(200).send(shirtsArray);
     }
-
-    static shirtGetById (req, res) {
-        const {id} = req.params;
+    /**
+     * Grabs a shirt based on its id
+     * @param {Object} req - contains info about the HTTP request 
+     * @param {Object} res - sends back the desired HTTP response
+     */
+    static shirtGetById(req, res) {
+        const {
+            id
+        } = req.params;
         const getShirt = ShirtsModel.findShirtById(id);
         if (getShirt) {
             res.status(200).send(getShirt)
@@ -24,7 +32,12 @@ class ShirtsController {
         }
     }
 
-    static shirtCreateShirt (req, res) {
+    /**
+     * Creates a shirt based on the req
+     * @param {Object} req - contains info about the HTTP request 
+     * @param {Object} res - sends back the desired HTTP response
+     */
+    static shirtCreateShirt(req, res) {
         const shirt = {
             shirtGender: req.body.shirtGender,
             shirtName: req.body.shirtName,
@@ -37,8 +50,15 @@ class ShirtsController {
         res.status(200).send(shirt);
     }
 
-    static shirtUpdateShirtById (req, res) {
-        const {id} = req.params;
+    /**
+     * Updates a shirt based on the req
+     * @param {Object} req - contains info about the HTTP request 
+     * @param {Object} res - sends back the desired HTTP response
+     */
+    static shirtUpdateShirtById(req, res) {
+        const {
+            id
+        } = req.params;
         const shirt = {
             shirtGender: req.body.shirtGender,
             shirtName: req.body.shirtName,
@@ -50,8 +70,15 @@ class ShirtsController {
         res.status(200).send(shirt);
     }
 
-    static shirtDeleteById (req, res) {
-        const {id} = req.params;
+    /**
+     * Deletes a shirt bases on the req
+     * @param {Object} req - contains info about the HTTP request 
+     * @param {Object} res - sends back the desired HTTP response
+     */
+    static shirtDeleteById(req, res) {
+        const {
+            id
+        } = req.params;
         const getShirt = ShirtsModel.findShirtById(id);
         if (getShirt) {
             ShirtsModel.deleteShirtById(id);

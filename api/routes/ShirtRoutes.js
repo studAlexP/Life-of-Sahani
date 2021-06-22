@@ -1,4 +1,6 @@
-const { Router } = require("express");
+const {
+    Router
+} = require("express");
 const shirtRoutes = Router();
 
 const ShirtsController = require("../controllers/ShirtController");
