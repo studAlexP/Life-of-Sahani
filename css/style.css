@@ -73,7 +73,6 @@ nav li {
 }
 
 
-
 #pb {
   width: 310px;
   float: left;
@@ -113,9 +112,11 @@ footer {
 
 nav .openMenu {
   font-size: 2rem;
+  width: 2rem;
   display: none;
   cursor: pointer;
   padding-top: 10px;
+  padding-left: 10px;
 }
 
 nav .mainMenu .closeMenu,
@@ -125,7 +126,7 @@ nav .mainMenu .closeMenu,
   cursor: pointer;
 }
 
-@media(max-width: 800px) {
+@media(max-width: 950px) {
   nav .mainMenu {
     height: 100vh;
     position: fixed;
@@ -164,7 +165,7 @@ nav .mainMenu .closeMenu,
   }
 
   .current {
-    background: none;
+    background: #383838;
   }
 
 }
@@ -191,4 +192,10 @@ nav .mainMenu .closeMenu,
   }
 
 
+}
+
+@media(max-width: 950px) {
+  #invisibleD{
+    display: none;
+  }
 }
