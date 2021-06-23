@@ -86,7 +86,9 @@ main {
   width: 500px;
 }
 
-
+iframe{ 
+  border: 0px;
+}
 
 .link {
   color: #a6a6a6;

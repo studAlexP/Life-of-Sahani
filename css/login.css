@@ -1,0 +1,41 @@
+main {
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: larger;
+}
+
+h1 {
+    padding: 20px 0px 30px 0px;
+}
+
+#login {
+    border: 3px solid white;
+    height: 31px;
+    width: 80px;
+    background-color: #2b2b2b;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="text"], input[type="password"] {
+    border: 3px solid white;
+    height: 25px;
+    width: 150px;
+    background-color: #000000;
+    color: white;
+}
+
+#password{
+    margin-left: 6px;
+}
+
+form {
+    width: 600px;
+    margin-top: 20px;
+    display: block;
+}
+
+div {
+    width: 100%;
+    margin: 15px auto;
+}
