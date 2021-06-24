@@ -6,7 +6,7 @@ window.onload = () => {
 
 let input = document.getElementsByTagName('input');
 let login = document.getElementById('login');
-var formtest = document.querySelector('form')
+var form = document.querySelector('form')
 /*
 let user = document.getElementsById('user');
 let password = document.getElementById('password');
@@ -18,7 +18,7 @@ form.onsubmit = () => {
     return false
 };
 
-login[0].onclick = () => {
+login.onclick = () => {
     if ((input[0].value != "") && (input[1].value != "")) {
         if ((input[0].value == sessionStorage.getItem("username")) && (input[1].value == sessionStorage.getItem("password"))) {
             form.onsubmit = () => {return 1}
