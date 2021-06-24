@@ -337,10 +337,10 @@ class ShoppingCart {
                         index = 1;
                         break;
                     case "Sahani Logo":
-                        index = 2;
+                        index = 4;
                         break;
                     case "Marksman &  Support":
-                        index = 3;
+                        index = 5;
                         break;
                 }
                 xhttp.open("DELETE", serverUrl + "/delete/" + index);
@@ -358,10 +358,10 @@ class ShoppingCart {
                         index = 1;
                         break;
                     case "Sahani Logo":
-                        index = 2;
+                        index = 4;
                         break;
                     case "Marksman &  Support":
-                        index = 3;
+                        index = 5;
                         break;
                 }
                 xhttp.open("PUT", serverUrl + "/" + index);
