@@ -28,20 +28,6 @@ async function initDatabase() {
 
             },
             {
-                shirtGender: "unisex",
-                shirtName: "Sahani Logo",
-                shirtPrice: 30.00,
-                shirtImage: "../img/shop/black_pullover_1.png",
-                shirtQuantity: 5
-            },
-            {
-                shirtGender: "unisex",
-                shirtName: "Marksman &  Support",
-                shirtPrice: 28.00,
-                shirtImage: "../img/shop/black_pullover_2.png",
-                shirtQuantity: 5
-            },
-            {
                 shirtGender: "male",
                 shirtName: "Red Lips",
                 shirtPrice: 25.00,
@@ -53,6 +39,20 @@ async function initDatabase() {
                 shirtName: "Grey Eyes",
                 shirtPrice: 20.00,
                 shirtImage: "../img/shop/white-men_tshirt_2.png",
+                shirtQuantity: 5
+            },
+            {
+                shirtGender: "unisex",
+                shirtName: "Sahani Logo",
+                shirtPrice: 30.00,
+                shirtImage: "../img/shop/black_pullover_1.png",
+                shirtQuantity: 5
+            },
+            {
+                shirtGender: "unisex",
+                shirtName: "Marksman &  Support",
+                shirtPrice: 28.00,
+                shirtImage: "../img/shop/black_pullover_2.png",
                 shirtQuantity: 5
             }
         ]
