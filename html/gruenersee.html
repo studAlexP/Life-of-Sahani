@@ -13,10 +13,11 @@
     <link href="../css/respoBlobs.css" type="text/css" rel="stylesheet">
     <script defer src="../js/nav.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body> 
 
     <header>
         <a href="https://www.youtube.com/channel/UCf5L1k4PVqvF1D-3HfItbyA" target="_blank">
@@ -108,12 +109,54 @@
 
         <table>
             <tr>
-                <td><iframe
+                <td>
+                    <div class="container">
+                        <div class="card">
+                            <h2><i class="fa fa-map-marker"></i> <span id="location"></span></h2>
+                            <h6 id="weather"></h6>
+                            <h4><span id="temp"></span><sup>o</sup>C</h4>
+                            <img id="icon" src="">
+                            <button onClick="window.location.reload();" class="refresh"><i class="fa fa-refresh"></i></button>
+                        </div>
+                      </div>
+                      </body>
+                      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                        crossorigin="anonymous"></script>
+                      <script type="text/javascript">
+                      link = "https://api.openweathermap.org/data/2.5/weather?q=Oberort&appid=a134631db36e049f0beab7db2bf98956";
+                      var request = new XMLHttpRequest();
+                      request.open('GET',link,true);
+                      request.onload = function(){
+                       var obj = JSON.parse(this.response);
+                       console.log(obj);
+                       
+                       document.getElementById('weather').innerHTML = obj.weather[0].description;
+                       document.getElementById('location').innerHTML = obj.name;
+                       document.getElementById('temp').innerHTML = obj.main.temp.toFixed(1) - 273.1;
+                       document.getElementById('icon').src = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+                      
+                       if (request.status >= 200 && request.status < 400) {
+                       var temp = obj.main.temp;
+                       }
+                       else{
+                        console.log("The city doesn't exist! Kindly check");
+                       }
+                      }
+                      request.send();
+                      </script>
+                </td>
+                <td>
+                    <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.301927757992!2d15.054409965628283!3d47.542452129180404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4771e567e016adcf%3A0x94037263f97c0d6c!2sGr%C3%BCner%20See!5e0!3m2!1sen!2sat!4v1617984958036!5m2!1sen!2sat"
-                        allowfullscreen="" loading="lazy"></iframe> </td>
-                <td><iframe src="https://www.youtube.com/embed/XWU9nlPJBec" title="YouTube video player" frameborder="0"
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                </td>
+                <td>
+                    <iframe src="https://www.youtube.com/embed/XWU9nlPJBec" title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe> </td>
+                        allowfullscreen>
+                    </iframe>
+                </td>
             </tr>
         </table>
 
