@@ -1,0 +1,202 @@
+app.post('/auth', function (request, response) {
+    var username = request.body.username;
+    var password = request.body.password;
+    if (username && password) {
+        if(username ==="Test") {
+            request.session.loggedin = true;
+            request.session.username = username;
+            console.log('TEst')
+            response.redirect('/home');
+        }
+        else{
+            response.send('Incorrect Username and/or Password!')
+        }
+        response.end();
+    }
+    else{
+        console.log("g")
+    }
+});
+
+
+
+        <p class="question"> 
+            Is this the first time you have visited our website?
+        </p>
+        <input id="yes" name="answer" type="radio" value="yes">
+        <label for="yes">yes</label>
+        <input id="no" name="answer" type="radio" value="no">
+        <label for="no">no</label>
+
+        <p class="question">
+            What is the primary reason you came to our website?
+        </p>
+        <textarea id="answertoreason" name="reason" rows="20"></textarea>
+
+        <p class="question">
+            Did you find what you needed?
+        </p>
+        <input id="all" name="found" type="radio" value="Yes, all of it">
+        <label for="all">Yes, all of it</label>
+        <input id="some" name="found" type="radio" value="Yes, some of it">
+        <label for="some">Yes, some of it</label>
+        <input id="none" name="found" type="radio" value="No, none of it">
+        <label for="none">No, none of it</label>
+
+        <p class="question">
+            Is our website easy to use?
+        </p>
+        <input id="very_easy" name="difficulty" type="radio" value="answer">
+        <label for="very_easy">Very Easy</label>
+        <input id="easy" name="difficulty" type="radio" value="answer">
+        <label for="easy">Easy</label>
+        <input id="average" name="difficulty" type="radio" value="answer">
+        <label for="average">Average</label>
+        <input id="difficult" name="difficulty" type="radio" value="answer">
+        <label for="difficult">Difficult</label>
+        <input id="very_difficult" name="difficulty" type="radio" value="answer">
+        <label for="very_difficult">Very Difficult</label>
+        
+        <p class="question">
+            Is our website professional?
+        </p>
+        <input id="very_professional" name="professionall" type="radio" value="answer">
+        <label for="very_professional">Very Professional</label>
+        <input id="professional" name="professionall" type="radio" value="answer">
+        <label for="professional">Professional</label>
+        <input id="average" name="professionall" type="radio" value="answer">
+        <label for="average">Average</label>
+        <input id="bad" name="professionall" type="radio" value="answer">
+        <label for="bad">Bad</label>
+        <input id="very_bad" name="professionall" type="radio" value="answer">
+        <label for="very_bad">Very Bad</label>
+
+        <p class="question">
+            Is our website informative?
+        </p>
+        <input id="very_informative" name="informativee" type="radio" value="answer">
+        <label for="very_informative">Very Informative</label>
+        <input id="informative" name="informativee" type="radio" value="answer">
+        <label for="informative">Informative</label>
+        <input id="average" name="informativee" type="radio" value="answer">
+        <label for="average">Average</label>
+        <input id="notinformative" name="informativee" type="radio" value="answer">
+        <label for="not_informative">Not Informative</label>
+       
+        <p class="question">
+            Is our website visually pleasing?
+        </p>
+        <input id="yes" name="visuallypleasing" type="radio" value="answer">
+        <label for="yes">Yes</label>
+        <input id="not_at_all" name="visuallypleasing" type="radio" value="answer">
+        <label for="not_at_all">Not at all</label>
+        <input id="no" name="visuallypleasing" type="radio" value="answer">
+        <label for="no">No</label>
+
+        <p class="question">
+            What is the likelihood that you will visit our website again?
+        </p>
+        <input id="very_likely" name="visit_again" type="radio" value="answer">
+        <label for="very_likely">Very likely</label>
+        <input id="likely" name="visit_again" type="radio" value="answer">
+        <label for="likely"> likely</label>
+        <input id="slightly_likely" name="visit_again" type="radio" value="answer">
+        <label for="slightly_likely" >Slightly likely</label>
+        <input id="not_at_all" name="visit_again" type="radio" value="answer">
+        <label for="not_at_all">Not at all likely</label>
+
+        <p id="comments" class="question1">
+            Please add any comments you have for improving the website. We welcome suggestions on specific areas for
+            improvements, features you would like to see added to the site, and examples of what you consider good
+            websites
+        </p>
+        <textarea id="improvements" name="improvements" rows="20"></textarea>
+
+
+
+
+        window.onload = () => {
+    this.sessionStorage.setItem("username", "test");
+    this.sessionStorage.setItem("password", "test");
+
+}
+
+
+
+let input = document.getElementsByTagName('input');
+let user = document.getElementsById('user');
+let password = document.getElementById('password');
+let submit = document.getElementById('submit')
+let form = document.querySelector('form');
+
+form.onsubmit = () => {
+    return false
+};
+
+submit.onclick = () => {
+    if ((input[0].value != "") && (input[1].value != "")) {
+        if ((input[0].value == sessionStorage.getItem('username')) && (input[1].value == sessionStorage.getItem('password'))) {
+            form.onsubmit = () => {
+                return 1
+            }
+            document.cookie = "username" + input[0].value;
+            document.cookie = "password" + input[1].value;
+
+        } else{
+            if ((input[0].value != sessionStorage.getItem('username'))) {
+                input[0].textContent = "Username is not correct";
+                setTimeout(() => {
+                    input[0].nextElementSibling.textContent = "";
+                }, 2000)
+                if ((input[1].value != sessionStorage.getItem('password'))) {
+                    input[1].textContent = "Password is not correct";
+                    setTimeout(() => {
+                        input[1].nextElementSibling.textContent = "";
+                    }, 2000)
+                }
+            }
+
+        } else {
+            if (input[0].value == "") {
+                input[0].nextElementSibling.textContent = "Username is empty";
+                setTimeout(() => {
+                    input[0].nextElementSibling.textContent = "";
+                }, 2000);
+            }
+            if (input[1].value == "") {
+                input[1].nextElementSibling.textContent = "Password is empty";
+                setTimeout(() => {
+                    input[1].nextElementSibling.textContent = "";
+                }, 2000);
+            }
+        }
+    }
+}
+
+
+        
+
+
+
+
+
+
+const session = require('express-session')
+
+
+
+
+app.use(session({
+    secret: '0800fc577294c34e0b28ad2839435945',
+    saveUninitialized: true,
+    resave: true,
+}))
+
+
+
+
+const loginRoutes = require('./api/routes/LoginRoutes');
+const logoutRoutes = require('./api/routes/LogoutRoutes');
+
+app.use('/login', loginRoutes);
+app.use('/logout', logoutRoutes);

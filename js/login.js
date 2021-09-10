@@ -21,30 +21,28 @@ form.onsubmit = () => {
 login.onclick = () => {
     if ((input[0].value != "") && (input[1].value != "")) {
         if ((input[0].value == sessionStorage.getItem("username")) && (input[1].value == sessionStorage.getItem("password"))) {
-            form.onsubmit = () => {return 1}
+            form.onsubmit = () => {
+                return 1
+            }
             document.cookie = "username" + input[0].value;
-            document.cookie = "password" + input[1].value;} 
-        else
-        {
-            if ((input[0].value != sessionStorage.getItem("username"))) 
-            {
+            document.cookie = "password" + input[1].value;
+        } else {
+            if ((input[0].value != sessionStorage.getItem("username"))) {
                 input[0].nextElementSibling.textContent = "Username NOT match";
                 setTimeout(() => {
                     input[0].nextElementSibling.textContent = "";
                 }, 2000);
             }
-            if ((input[0].value != sessionStorage.getItem("password"))) 
-            {
+            if ((input[0].value != sessionStorage.getItem("password"))) {
                 input[0].nextElementSibling.textContent = "Password NOT match";
                 setTimeout(() => {
                     input[0].nextElementSibling.textContent = "";
                 }, 2000);
             }
         }
-    }
-    else {
+    } else {
         if (input[0].value == "") {
-             input[0].nextElementSibling.textContent = "Username is empty";
+            input[0].nextElementSibling.textContent = "Username is empty";
             setTimeout(() => {
                 input[0].nextElementSibling.textContent = "";
             }, 2000);
@@ -54,6 +52,6 @@ login.onclick = () => {
             setTimeout(() => {
                 input[1].nextElementSibling.textContent = "";
             }, 2000);
-         }
+        }
     }
 }

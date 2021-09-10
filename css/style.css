@@ -86,7 +86,7 @@ main {
   width: 500px;
 }
 
-iframe{ 
+iframe {
   border: 0px;
 }
 
@@ -197,7 +197,7 @@ nav .mainMenu .closeMenu,
 }
 
 @media(max-width: 950px) {
-  #invisibleD{
+  #invisibleD {
     display: none;
   }
 }

@@ -1,31 +1,31 @@
-h1{
-    font-family: "Braga", "Arial", cursive;
-  }
-
-main{
-   font-size: large;
-   font-family: Century Gothic, Arial, sans-serif;
-   padding-right: 250px;
-   padding-left: 50px;
-   padding-top: 50px;
-   text-align: justify;
-   line-height: 1.8;
-   
+h1 {
+  font-family: "Braga", "Arial", cursive;
 }
 
-p{
+main {
+  font-size: large;
+  font-family: Century Gothic, Arial, sans-serif;
+  padding-right: 250px;
+  padding-left: 50px;
+  padding-top: 50px;
+  text-align: justify;
+  line-height: 1.8;
+
+}
+
+p {
   margin-bottom: 50px;
 }
 
 iframe {
   width: 560px;
-  height: 315px; 
+  height: 315px;
 }
 
 
 
 @media only screen and (max-width: 1492px) {
-  main{
+  main {
     padding-right: 20px;
     padding-left: 20px;
   }
@@ -38,6 +38,3 @@ iframe {
     width: 100%;
   }
 }
-
-
-  

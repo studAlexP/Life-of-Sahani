@@ -41,11 +41,11 @@ h2 {
     color: #fff;
 }
 
-iframe{
-    width:400px;
+iframe {
+    width: 400px;
     height: 225px;
     border: 0px;
-  }
+}
 
 @media only screen and (max-width: 1492px) {
     main {
