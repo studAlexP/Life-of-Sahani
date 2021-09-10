@@ -13,7 +13,10 @@
     <link href="../css/respoBlobs.css" type="text/css" rel="stylesheet">
     <script defer src="../js/nav.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<<<<<<< HEAD
     
+=======
+>>>>>>> 70fea0af3200f0a91d2f69e0c2787581bb24ada7
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -133,7 +136,11 @@
                        
                        document.getElementById('weather').innerHTML = obj.weather[0].description;
                        document.getElementById('location').innerHTML = obj.name;
+<<<<<<< HEAD
                        document.getElementById('temp').innerHTML = obj.main.temp.toFixed(0) - 273;
+=======
+                       document.getElementById('temp').innerHTML = obj.main.temp.toFixed(1) - 273.1;
+>>>>>>> 70fea0af3200f0a91d2f69e0c2787581bb24ada7
                        document.getElementById('icon').src = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
                       
                        if (request.status >= 200 && request.status < 400) {

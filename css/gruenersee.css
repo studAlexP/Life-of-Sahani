@@ -18,7 +18,11 @@ margin-bottom: 50px;
 }
 
 table{
+<<<<<<< HEAD
 border-spacing: 15px;
+=======
+  border-spacing: 15px;
+>>>>>>> 70fea0af3200f0a91d2f69e0c2787581bb24ada7
 }
 
 
@@ -87,3 +91,46 @@ transition: 0.3s;
 button.refresh:hover{
 box-shadow: inset 10px 4px 18px #252525, inset 5px 5px 18px #4a4a4a;
 }
+<<<<<<< HEAD
+=======
+
+
+.container {
+  width: 500px;
+}
+.card {
+  border-radius: 20px;
+  background: #343434;
+  box-shadow: 5px 5px 10px #191b1b, -5px -5px 10px #595959;
+  padding: 3%;
+  text-align: center;
+}
+.card h4 {
+  font-size: 4rem;
+  font-weight: 400;
+  margin: 1rem 0;
+}
+img#icon {
+  width: 20%;
+}
+h6#weather{
+text-transform: capitalize;
+}
+button.refresh {
+  display: block;
+  width: 100px;
+  margin: 10px auto;
+  border: 0;
+  background: transparent;
+  color: #9c9c9d;
+  font-size: 30px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 10px 4px 18px #252525, 5px 5px 18px #4a4a4a;
+  transition: 0.3s;
+}
+button.refresh:hover{
+box-shadow: inset 10px 4px 18px #252525, inset 5px 5px 18px #4a4a4a;
+}
+  
+>>>>>>> 70fea0af3200f0a91d2f69e0c2787581bb24ada7
